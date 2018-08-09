@@ -1,10 +1,24 @@
 <?php
 include_once 'config/db.php'; 
-include_once 'model/register.php'; 
+include_once 'model/register.php';
+include_once 'model/getcompanyAll.php'; 
 $database = new Database();
 $db = $database->getConnection();
 
 $register = new Register($db);
+
+$c = new CompanyAll($db);
+$pre = $c->getAll();
+
+
+foreach ($c->getAll() as $news)
+{
+  echo $news['name'].'<br>';
+  echo $news['lastname'];
+  echo $news['email'];
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,3 +60,4 @@ $register = new Register($db);
       </form>
     </div>
   </nav>
+

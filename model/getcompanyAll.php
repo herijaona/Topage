@@ -12,13 +12,11 @@ class CompanyAll{
         $this->conn = $db;
     }
     public function getAll(){
-        $companies = [];
         global $db;
-        $q = $db->query('SELECT lastname FROM register');
+        $q = $db->query('SELECT name,lastname,email,adresse FROM register');
         $q->execute();
-        $resultado = $q->fetchAll(PDO::FETCH_COLUMN);
-        var_dump($resultado);
-
+        $resultado = $q->fetchAll();
+        return $resultado;
     }
 }
 ?>

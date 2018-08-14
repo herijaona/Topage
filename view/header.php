@@ -18,7 +18,6 @@ foreach ($c->getAll() as $news)
   echo $news['email'];
 }
 
-
 ?>
 <!DOCTYPE html>
 <html>

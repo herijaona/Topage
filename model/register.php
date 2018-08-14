@@ -43,5 +43,28 @@ class Register{
         }
  
     }
+
+    public function Login($username, $password)
+    {
+        try {
+            $query = $this->conn->prepare("SELECT name FROM  ". $this->table_register . " WHERE (lastname=:lastname OR email=:lastname) AND password=:password");
+            $query->bindParam("lastname", $lastname, PDO::PARAM_STR);
+            $enc_password = hash('sha256', $password);
+            $query->bindParam("password", $enc_password, PDO::PARAM_STR);
+            $query->execute();
+            if ($query->rowCount() > 0) {
+                $result = $query->fetch(PDO::FETCH_OBJ);
+                return $result->id;
+                var_dump($query->fetch(PDO::FETCH_OBJ));
+            } else {
+                var_dump('test2');
+                var_dump($query->fetch(PDO::FETCH_OBJ));
+                return false;
+            }
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+ 
 }
 ?>
